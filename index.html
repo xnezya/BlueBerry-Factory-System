@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blueberry Factory Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div id="sidebar">
+        <ul>
+            <li><a href="#supplier-management" onclick="showSection('supplier-management')">Supplier Management</a></li>
+            <li><a href="#product-management" onclick="showSection('product-management')">Product Management</a></li>
+            <li><a href="#sales-management" onclick="showSection('sales-management')">Sales Management</a></li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
+        <header>
+            <h1>Blueberry Factory Management System</h1>
+        </header>
+
+        <main>
+            <!-- Supplier Management -->
+            <section id="supplier-management" class="content-section">
+                <h2>Supplier Management</h2>
+                <div id="farmer-filter">
+                    <label for="search-name">Search by Name or Location:</label>
+                    <input type="text" id="search-name" placeholder="Farmer name or location...">
+                    <button onclick="filterFarmers()">Search</button>
+                </div>
+                <div class="module" id="farmers-info">
+                    <h3>Farmers' Information</h3>
+                    <button onclick="openFarmerForm()">Add New Farmer</button>
+                    <!-- Farmer Form -->
+                    <div id="farmer-form-container">
+                        <form id="farmer-form" onsubmit="saveFarmer(event)">
+                            <label for="farmer-id">Farmer ID:</label>
+                            <input type="number" id="farmer-id" required />
+                    
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" required />
+                    
+                            <label for="contact">Contact:</label>
+                            <input type="text" id="contact" required />
+                    
+                            <label for="location">Location:</label>
+                            <input type="text" id="location" required />
+                    
+                            <button type="submit">Save Farmer</button>
+                        </form>
+                    </div>
+
+                    <table id="farmers-table">
+                        <thead>
+                            <tr>
+                                <th>Farmer ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Location</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Farmers Data will be added here -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <!-- Product Categorization and Packaging -->
+            <section id="product-management" class="content-section">
+                <h2>Product Categorization and Packaging</h2>
+                <div class="module" id="product-categories">
+                    <h3>Product Categories</h3>
+                    <ul>
+                        <li>Small (100g) - <input type="number" id="small-quantity" placeholder="Quantity" /> <span id="small-price">0</span> USD</li>
+                        <li>Medium (250g) - <input type="number" id="medium-quantity" placeholder="Quantity" /> <span id="medium-price">0</span> USD</li>
+                        <li>Large (500g) - <input type="number" id="large-quantity" placeholder="Quantity" /> <span id="large-price">0</span> USD</li>
+                        <li>Extra Large (1kg) - <input type="number" id="extra-large-quantity" placeholder="Quantity" /> <span id="extra-large-price">0</span> USD</li>
+                        <li>Family Pack (2kg) - <input type="number" id="family-pack-quantity" placeholder="Quantity" /> <span id="family-pack-price">0</span> USD</li>
+                        <li>Bulk Pack (5kg) - <input type="number" id="bulk-pack-quantity" placeholder="Quantity" /> <span id="bulk-pack-price">0</span> USD</li>
+                        <li>Premium (Custom weight) - <input type="number" id="premium-quantity" placeholder="Quantity" /> <span id="premium-price">0</span> USD</li>
+                    </ul>
+                </div>
+                <button onclick="categorizeAndPackageBlueberries()">Categorize and Package</button>
+            </section>
+
+            <!-- Sales Management -->
+            <section id="sales-management" class="content-section">
+                <h2>Sales Management</h2>
+                <div class="module" id="orders">
+                    <h3>Order Management</h3>
+                    <button onclick="openOrderForm()">Add New Order</button>
+                    <!-- Order Management Form -->
+                    <div id="order-form-container">
+                        <form id="order-form" onsubmit="saveOrder(event)">
+                            <label for="farmer-id">Farmer ID:</label>
+                            <input id="order-farmer-id" type="number" />
+                        
+                            <label for="quantity">Quantity (kg):</label>
+                            <input id="order-quantity" type="number" />
+                        
+                            <label for="price">Price per kilogram:</label>
+                            <input id="order-price" type="number" step="0.01" />
+                        
+                            <button type="submit">Save Order</button>
+                        </form>
+                    </div>
+                    <!-- Order Table -->
+                    <table id="order-table">
+                        <thead>
+                            <tr>
+                                <th>Purchase ID</th>
+                                <th>Farmer Name</th>
+                                <th>Date of Purchase</th>
+                                <th>Quantity (kg)</th>
+                                <th>Price per kilogram</th>
+                                <th>Total Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Orders will be inserted here -->
+                        </tbody>
+                    </table>
+                    <!-- Totals Card -->
+                    <div id="totals-card" style="position: fixed; top: 10px; right: 10px; padding: 10px; background-color: #333; color: white; border-radius: 5px;">
+                        <strong>Totals</strong>
+                        <div>Total Blueberries: <span id="total-blueberries">0</span> kg</div>
+                        <div>Total Cost: $<span id="total-cost">0</span></div>
+                    </div>                                         
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>
